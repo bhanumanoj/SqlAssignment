@@ -1,0 +1,102 @@
+Excercise-1
+
+1.select title,book_num from book_file where year>=1984;
+
+2.select * from book_file where year<1984 and year>1986;
+
+3.select pubname,pubaddress from Publisher order by pubname desc;
+
+4.select * from book_file where year between 1985 and 1987;
+
+5.select count(book_num) from book_file;
+
+6.select max(edition) from book_file;
+
+7.select book_num,topic,title from book_file where topic like 'data%';
+
+8.select pubname,pubcode,pubaddress from Publisher where pubname like 'A%' and pubcode<'P5';
+
+9.select distinct topic from book_file;
+
+	
+
+Exercise-2
+
+1.create table Employee(
+EmpNum varchar(3) PRIMARY,
+Name varchar(10) NOT NULL,
+DeptNo varchar(3) NOT NULL
+);
+
+2.INSERT INTO Employee VALUES('E1','Sandy','D1');
+
+3.Alter table Employee ADD RoomNo varchar(10);
+
+4.update Employee set RoomNo='R1' where DeptNo='D2';
+
+5.update Employee set RoomNo='R2' where EmpNo='E6';
+update Employee set RoomNo='R3' where EmpNo='E7';
+update Employee set RoomNo='R4' where EmpNo='E8';
+
+6.update Employee set Name='Fido' where EmpNo='E5';
+
+7.Alter table Employee DROP COLUMN Name;
+
+8.Delete from Employee where DeptNo='D2';
+
+
+Exercise-3
+
+1.select Branchname from Branch b join Area a on b.area_code=a.area_code where manager='Bloggs';
+
+2.select avg(product_price) from Product;
+
+3.select max(product_price) from Product;
+
+4.select town from branch b,product p,stock s where b.branch_code=s.branch_code and p.product_code=s.product_code and p.prod_desc="Posh-Dress";
+
+5.select p.prod_desc, b.branchname from product p,branch b,stock s where p.product_code=s.product_code and b.branch_code=s.branch_code and s.stock_quant<4;
+
+
+Exercise-4
+
+1.select EmpNum,EmpFirstName||EmpLastName as EmpName from Employee;
+
+2.select * from Computer;
+
+3.select MfgModel as ModelName from Computer where ProType='486DX' ;
+
+4.select TagNum from PC where EmpNum=124 and location='Home';
+
+5.select CompID,MfgModel from Computer where ProType='486DX'or Protype='486DX2';
+
+6.select TagNum,CompID from PC where location<>'Home';
+
+7.select TagNum,PackID from Software where SoftCost between 200 and 500;
+
+8.select TagNum,PackID,(Softcost*0.95) as Discounted_Software_Cost from Software;
+
+9.select TagNum,PackID,(Softcost*0.95) as Discounted_Software_Cost from Software where "Discounted Software Cost" >=400;
+
+10.select PackID,PackName from Package where PackType IN('Database','Spreadsheet');
+
+11.select EmpNum,EmpFirstName||' '||EmpLastName as EmpName from Employee where EmpLastName='Fienstein';
+
+12.select * from Package order by PackName;
+
+13.select * from Package group by PackType order by PackCost desc;
+
+14.select count(PackID) from Package where PackCost>400;
+
+15.select avg(PackCost) from Package where PackType='Word Processing';
+
+16.select PackID,PackName from Package where PackCost>(select avg(PackCost) from Package);
+
+17.select p.TagNum,p.CompID,c.MfgName from PC p  INNER JOIN  Computer c on p.CompID=c.CompID;
+
+18. select p.TagNum,p.CompID,c.MfgName from PC p  INNER JOIN  Computer c on p.CompID=c.CompID where EmpNum=124;
+
+19.select e.EmpNum,e.EmpFirstName||' '||e.EmpLastName as EmpName from Employee e INNER JOIN PC p on e.EmpNum=p.EmpNum where location<>'Home';
+
+20.SELECT Software.TagNum, CompId, PackName, PackVer, PackType
+FROM PC LEFT JOIN Software ON Software.TagNum = PC.TagNum LEFT JOIN Package ON Software.PackId = Package.PackId;
